@@ -1,0 +1,11 @@
+.testimonial-card {
+  border: 2px solid #87a96b;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+}
+
+.testimonial-actions {
+  text-align: right;
+}
