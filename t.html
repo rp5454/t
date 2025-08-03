@@ -1,119 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Customer Form</title>
-  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testimonials</title>
+  <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="p-4">
-
-  <div class="container border p-4">
-    <h3 class="mb-4">Add Customer</h3>
-    <form id="customerForm">
-      <div class="mb-3">
-        <label for="name" class="form-label">Name:</label>
-        <input type="text" class="form-control" id="name">
-        <div id="nameError" class="error"></div>
+<body>
+  <div class="container mt-5 text-center">
+    <h2>Submit Your Testimonial</h2>
+    <form id="testimonial-form" class="mt-4">
+      <div class="row justify-content-center mb-3">
+        <div class="col-md-2">
+          <label class="btn btn-primary w-100">Name</label>
+        </div>
+        <div class="col-md-6">
+          <input type="text" id="name" class="form-control" placeholder="Your Name" required />
+        </div>
       </div>
-
-      <div class="mb-3">
-        <label for="email" class="form-label">Email Id:</label>
-        <input type="email" class="form-control" id="email">
-        <div id="emailError" class="error"></div>
+      <div class="row justify-content-center mb-3">
+        <div class="col-md-2">
+          <label class="btn btn-primary w-100">Message</label>
+        </div>
+        <div class="col-md-6">
+          <input type="text" id="message" class="form-control" placeholder="Enter your Message" required />
+        </div>
       </div>
-
-      <div class="mb-3">
-        <label for="contact" class="form-label">Contact No:</label>
-        <input type="text" class="form-control" id="contact">
-        <div id="contactError" class="error"></div>
-      </div>
-
-      <div class="mb-3">
-        <label for="accountType" class="form-label">Account Type:</label>
-        <select class="form-select" id="accountType">
-          <option value="">Select account type</option>
-          <option value="savings">Savings</option>
-          <option value="current">Current</option>
-        </select>
-        <div id="accountTypeError" class="error"></div>
-      </div>
-
-      <button type="submit" class="btn btn-primary">Add Customer</button>
+      <button type="submit" class="btn btn-warning px-4">Submit</button>
     </form>
 
-    <hr>
+    <hr class="my-4" />
 
-    <h4>Customer List</h4>
-    <table class="table table-bordered mt-3">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Contact</th>
-          <th>Account Type</th>
-        </tr>
-      </thead>
-      <tbody id="customerTableBody"></tbody>
-    </table>
+    <h4 class="mb-4">Testimonials</h4>
+    <div id="testimonial-list" class="text-start"></div>
   </div>
 
-  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    const form = document.getElementById("customerForm");
-    const name = document.getElementById("name");
-    const email = document.getElementById("email");
-    const contact = document.getElementById("contact");
-    const accountType = document.getElementById("accountType");
-
-    const nameError = document.getElementById("nameError");
-    const emailError = document.getElementById("emailError");
-    const contactError = document.getElementById("contactError");
-    const accountTypeError = document.getElementById("accountTypeError");
-    const tableBody = document.getElementById("customerTableBody");
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      let valid = true;
-
-      nameError.textContent = "";
-      emailError.textContent = "";
-      contactError.textContent = "";
-      accountTypeError.textContent = "";
-
-      if (!/^[A-Za-z\s]+$/.test(name.value.trim())) {
-        nameError.textContent = "Please enter only alphabets";
-        valid = false;
-      }
-
-      if (!/^\S+@\S+\.\S+$/.test(email.value.trim())) {
-        emailError.textContent = "Please enter a valid email id";
-        valid = false;
-      }
-
-      if (!/^[7-9]\d{9}$/.test(contact.value.trim())) {
-        contactError.textContent = "Please enter valid 10-digit contact starting with 7-9";
-        valid = false;
-      }
-
-      if (accountType.value === "") {
-        accountTypeError.textContent = "Please select an account type";
-        valid = false;
-      }
-
-      if (valid) {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${name.value.trim()}</td>
-          <td>${email.value.trim()}</td>
-          <td>${contact.value.trim()}</td>
-          <td>${accountType.value}</td>
-        `;
-        tableBody.appendChild(row);
-        form.reset();
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
