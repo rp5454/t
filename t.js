@@ -1,40 +1,51 @@
+const form = document.getElementById("testimonial-form");
+const nameInput = document.getElementById("name");
+const messageInput = document.getElementById("message");
+const testimonialList = document.getElementById("testimonial-list");
 
-let n = parseInt(prompt("Enter the number of terms for Fibonacci series:"));
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  addTestimonial(nameInput.value, messageInput.value);
+  form.reset();
+});
 
-if (isNaN(n) || n <= 0) {
-    console.log("Please enter a valid positive number.");
-} else {
-    let fib = [0, 1];
-    console.log("Fibonacci Series:");
-    if (n === 1) {
-        console.log(fib[0]);
-    } else {
-        console.log(fib[0]);
-        console.log(fib[1]);
-        for (let i = 2; i < n; i++) {
-            fib[i] = fib[i - 1] + fib[i - 2];
-            console.log(fib[i]);
-        }
-    }
+function addTestimonial(name, message) {
+  const card = document.createElement("div");
+  card.className = "testimonial-card";
+
+  const nameElem = document.createElement("h6");
+  nameElem.textContent = name;
+
+  const messageElem = document.createElement("p");
+  messageElem.textContent = message;
+
+  const actionsDiv = document.createElement("div");
+  actionsDiv.className = "testimonial-actions";
+
+  const editBtn = document.createElement("button");
+  editBtn.textContent = "Edit";
+  editBtn.className = "btn btn-sm btn-warning me-2";
+  editBtn.onclick = () => editTestimonial(card, nameElem, messageElem);
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+  deleteBtn.className = "btn btn-sm btn-danger";
+  deleteBtn.onclick = () => testimonialList.removeChild(card);
+
+  actionsDiv.appendChild(editBtn);
+  actionsDiv.appendChild(deleteBtn);
+
+  card.appendChild(nameElem);
+  card.appendChild(messageElem);
+  card.appendChild(actionsDiv);
+
+  testimonialList.appendChild(card);
 }
 
+function editTestimonial(card, nameElem, messageElem) {
+  const newName = prompt("Edit Name:", nameElem.textContent);
+  const newMsg = prompt("Edit Message:", messageElem.textContent);
 
-
-
-
-
-let n = parseInt(prompt("Enter the limit for multiplication table of 8:"));
-
-if (isNaN(n) || n <= 0) {
-    console.log("Please enter a valid positive number.");
-} else {
-    console.log(`Multiplication Table of 8 up to ${n}:`);
-    for (let i = 1; i <= n; i++) {
-        console.log(`8 x ${i} = ${8 * i}`);
-    }
+  if (newName !== null) nameElem.textContent = newName;
+  if (newMsg !== null) messageElem.textContent = newMsg;
 }
-
-
-
-
-
