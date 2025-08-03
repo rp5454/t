@@ -1,0 +1,47 @@
+# Introduction
+
+This is a responsive landing page for **Standard Chartered**, designed to showcase their services, promotions, and digital offerings.
+The page demonstrates usage of **HTML5**, **CSS3**, and **Bootstrap 5** to create a professional UI layout. The objective of this project is to practice responsive web design using Bootstrap grid system and components such as navbar, cards, and footer.
+
+# Getting Started
+
+Follow the instructions below to run this project locally.
+
+1)Installation Process
+
+1. Download the zip at your local machine:
+2. Extract the file at Users/2030919<edit this with your id>/goldenversions/appr-rhone-repo/99999-appr-rhone-repo
+3. Ensure your directory looks like following: 
+99999-appr-rhone-repo/
+    ├── index.html
+    ├── logo.png
+    ├── img1.jpg
+    ├── img2.jpg
+    ├── img3.jpg
+    ├── img4.jpg
+    └── img5.jpg
+    ├── styles2.css
+
+
+2)Software Dependencies
+Web Browser (Edge)
+
+Node.js 
+
+Bootstrap is installed via nodejs as a prerequisite.Ensure you have installed bootstrap at following directory for the setup to properly work:
+
+3)Latest Releases
+This is a static web page and doesn't have versioned releases. Any future iterations can include:
+-Customer Detail Page
+-Testimonials
+
+4)API References
+Currently Not applicable. This is in a front-end static stage with no backend or external APIs.
+
+# Build and Test
+There is no build process or complex environment setup. Just open index.html in any modern browser or type following at VS Terminal:
+open index.html
+
+Contribute
+Contributions are welcome to enhance this static project.
+Here further javascript can be integrated to make this static frontend be more interactive. Simply pull request here for contributions. 
