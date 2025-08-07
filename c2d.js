@@ -2,7 +2,7 @@ import React from "react";
 
 function CustomerDetails({ customer }) {
   return (
-    <div style={{ flex: 1 }}>
+    <div>
       <h3>Customer Details</h3>
       {customer ? (
         <div>
