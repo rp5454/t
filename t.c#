@@ -1,0 +1,72 @@
+frontend/
+│
+├── public/                                # Static files
+│   ├── index.html
+│   ├── favicon.ico
+│   └── manifest.json
+│
+├── src/
+│   │
+│   ├── assets/                            # Images, icons, logos, styles
+│   │   ├── images/
+│   │   └── styles/
+│   │       ├── global.css
+│   │       └── variables.css
+│   │
+│   ├── components/                        # Reusable UI components
+│   │   ├── layout/
+│   │   │   ├── Navbar.js
+│   │   │   ├── Sidebar.js
+│   │   │   ├── Footer.js
+│   │   │   └── ProtectedRoute.js
+│   │   ├── forms/
+│   │   │   ├── InputField.js
+│   │   │   ├── FileUpload.js
+│   │   │   └── SelectDropdown.js
+│   │   └── tables/
+│   │       ├── ApplicationsTable.js
+│   │       └── ReportsTable.js
+│   │
+│   ├── pages/                             # Pages for each User Story
+│   │   ├── Auth/
+│   │   │   ├── LoginPage.js               # US1
+│   │   │   └── ResetPasswordPage.js
+│   │   ├── Applications/
+│   │   │   ├── ViewApplications.js        # US1
+│   │   │   ├── CreateApplication.js       # US2
+│   │   │   ├── EditApplication.js         # US2
+│   │   │   └── DeleteApplication.js       # US3
+│   │   ├── Documents/
+│   │   │   └── UploadDocuments.js         # US4
+│   │   ├── Offers/
+│   │   │   ├── ViewOffer.js               # US5
+│   │   │   └── AcceptOffer.js             # US6
+│   │   ├── Reports/
+│   │   │   └── DownloadReport.js          # US7
+│   │   └── NotFound.js
+│   │
+│   ├── services/                          # API calls
+│   │   ├── authService.js                 # login, logout, reset
+│   │   ├── applicationService.js          # create, edit, delete, fetch
+│   │   ├── documentService.js             # upload docs
+│   │   ├── offerService.js                # initial offer, accept offer
+│   │   └── reportService.js               # generate/download reports
+│   │
+│   ├── hooks/                             # Custom React hooks
+│   │   ├── useAuth.js
+│   │   └── useFetch.js
+│   │
+│   ├── utils/                             # Helper functions/constants
+│   │   ├── constants.js
+│   │   ├── validators.js
+│   │   └── formatters.js
+│   │
+│   ├── App.js                             # App entry point
+│   ├── index.js                           # ReactDOM entry
+│   ├── routes.js                          # All route configs
+│   └── setupTests.js                      # Jest/RTL config
+│
+├── package.json
+├── package-lock.json
+├── .env.example                           # Environment variables template
+└── README.md
