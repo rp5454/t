@@ -1,23 +1,18 @@
 // src/services/applicationService.js
-import axios from "axios";
-import { API_BASE_URL } from "../utils/constants";
-
 export const getApplications = async () => {
-  const response = await axios.get(`${API_BASE_URL}/applications`);
-  return response.data;
-};
-
-export const createApplication = async (applicationData) => {
-  const response = await axios.post(`${API_BASE_URL}/applications`, applicationData);
-  return response.data;
-};
-
-export const updateApplication = async (id, applicationData) => {
-  const response = await axios.put(`${API_BASE_URL}/applications/${id}`, applicationData);
-  return response.data;
+  // Mock data for frontend-only development
+  return [
+    {
+      id: "2030919",
+      name: "Rishabh Pathak",
+      status: "Pending",
+      age: 1,
+      handledBy: "Preeti"
+    }
+  ];
 };
 
 export const deleteApplication = async (id) => {
-  const response = await axios.delete(`${API_BASE_URL}/applications/${id}`);
-  return response.data;
+  console.log(`Mock delete application with id: ${id}`);
+  return { success: true };
 };
