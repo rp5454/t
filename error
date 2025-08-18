@@ -1,0 +1,73 @@
+First 50 lines
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import InputField from '../../components/forms/InputField'; 
+import FileUpload from '../../components/forms/FileUpload'; // Adjust path as per your project structure
+import SelectDropdown from '../../components/forms/SelectDropdown'; // Adjust path as per your project structure
+//import './CreateApplication.css'; 
+
+const CreateApplication = () => {
+  const navigate = useNavigate();
+  const { id } = useParams(); // Get the ID from the URL parameters for editing
+
+  const [form, setForm] = useState({
+    id: null, // Will store the unique ID for the application
+    firstName: '',
+    lastName: '',
+    dob: '',
+    sex: 'Male', // Default value
+    maritalStatus: 'Single', // Default value
+    nationality: '',
+    passportNo: '',
+    expiry: '',
+    district: '',
+    ward: '',
+    street: '',
+    city: '',
+    state: '',
+    zip: '',
+    mobile: '',
+    email: '',
+    photo: null, // Can be a File object or a string (URL/Base64)
+  });
+
+  const [errors, setErrors] = useState({});
+  const isEditing = !!id; // True if an ID is present in the URL, indicating an edit operation
+
+  // --- Local Storage Helper Functions ---
+  const loadApplications = () => {
+    const storedApplications = localStorage.getItem('creditCardApplications');
+    return storedApplications ? JSON.parse(storedApplications) : [];
+  };
+
+  const saveApplications = (apps) => {
+    localStorage.setItem('creditCardApplications', JSON.stringify(apps));
+  };
+
+  // --- Effect to Load Data for Editing ---
+  useEffect(() => {
+    if (isEditing) {
+      const applications = loadApplications();
+      // Find the application by ID, ensuring type consistency (convert URL id to Number)
+      const applicationToEdit = applications.find(app => app.id === Number(id));
+
+
+
+Last 15 lines: 
+            {/* Action Buttons */}
+            <div className="form-actions-container">
+              <button type="submit" className="btn btn-primary-gradient btn-lg">
+                {isEditing ? 'Update Application' : 'Submit Application'}
+              </button>
+              <button type="button" className="btn btn-secondary-light btn-lg" onClick={handleCancel}>
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+export default CreateApplication;
+      
