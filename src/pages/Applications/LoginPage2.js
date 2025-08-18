@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import { Link, useNavigate } from "react-router-dom";   // ✅ added useNavigate
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import "../../assets/styles/variables.css";
-import sclogo from '../../assets/images/sclogo.jpg';
+import sclogo from "../../assets/images/sclogo.jpg";
 import t1 from "../../assets/images/t1.jpg";
+
+// ✅ Import CreateApplication page
+import CreateApplication from "../Applications/CreateApplication";
 
 // ---------------- Home Component ----------------
 function Home() {
@@ -17,14 +20,19 @@ function Home() {
           <span className="navbar-title">Standard Chartered</span>
         </div>
         <div className="ms-auto login-signup-btn">
-          <Link to="/login" className="btn btn-success"> Login </Link>
+          <Link to="/login" className="btn btn-success">
+            {" "}
+            Login{" "}
+          </Link>
         </div>
       </nav>
-
       {/* Hero Section */}
-      <section className="hero" style={{
-        backgroundImage: `url(${t1})`
-      }}>
+      <section
+        className="hero"
+        style={{
+          backgroundImage: `url(${t1})`,
+        }}
+      >
         <div className="hero-overlay">
           <div className="hero-text">
             <h1 className="fw-bold">
@@ -32,33 +40,36 @@ function Home() {
             </h1>
             <p>Effortlessly pay your credit card bill through BillDesk.</p>
           </div>
-
           {/* Right Side Floating Boxes */}
           <div className="side-buttons">
             <div className="btn-box">
-              Priority Banking<br />
+              Priority Banking
+              <br />
               <small>Get vouchers up to 30%</small>
             </div>
             <div className="btn-box highlight">
-              Begin investment journey<br />
+              Begin investment journey
+              <br />
               <small>With SC Invest</small>
             </div>
             <div className="btn-box">
-              Fixed Deposits<br />
+              Fixed Deposits
+              <br />
               <small>@ 6.6% p.a.*</small>
             </div>
             <div className="btn-box highlight">
-              Effortless Payments<br />
+              Effortless Payments
+              <br />
               <small>With BillDesk</small>
             </div>
             <div className="btn-box">
-              Grievance Redressal<br />
+              Grievance Redressal
+              <br />
               <small>Grievance Redressal Day</small>
             </div>
           </div>
         </div>
       </section>
-
       {/* Footer */}
       <footer>
         <div className="container">
@@ -67,11 +78,21 @@ function Home() {
             <div className="col-md-4">
               <h5>Services</h5>
               <ul>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Bank with Us</a></li>
-                <li><a href="#">ATMs & Branches</a></li>
-                <li><a href="#">Get Help</a></li>
-                <li><a href="#">FAQs</a></li>
+                <li>
+                  <a href="#">About Us</a>
+                </li>
+                <li>
+                  <a href="#">Bank with Us</a>
+                </li>
+                <li>
+                  <a href="#">ATMs & Branches</a>
+                </li>
+                <li>
+                  <a href="#">Get Help</a>
+                </li>
+                <li>
+                  <a href="#">FAQs</a>
+                </li>
               </ul>
             </div>
           </div>
@@ -84,14 +105,13 @@ function Home() {
 // ---------------- Login Component ----------------
 function Login() {
   const [role, setRole] = useState("employee");
-  const navigate = useNavigate();   // ✅ navigation hook
+  const navigate = useNavigate(); // ✅ Hook for navigation
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`Logging in as: ${role}`);
-
-    // ✅ redirect to Create Application page
-    navigate("/applications/create");
+    console.log(`Logging in as:${role}`);
+    // ✅ Redirect to CreateApplication after login
+    navigate("/create-application");
   };
 
   return (
@@ -109,7 +129,6 @@ function Login() {
           </div>
         </div>
       </nav>
-
       <div className="login-container">
         <div className="login-card">
           {/* Role Switch */}
@@ -125,7 +144,6 @@ function Login() {
             <label className="btn btn-outline-dark" htmlFor="admin">
               Admin
             </label>
-
             <input
               type="radio"
               className="btn-check"
@@ -139,15 +157,14 @@ function Login() {
               Employee
             </label>
           </div>
-
           {/* Role label */}
           <p className="fw-semibold mb-3">
             {role === "admin" ? "Admin Login" : "Employee Login"}
           </p>
-
           {/* Login form */}
           <form onSubmit={handleSubmit}>
             <div className="input-group mb-3 custom-input">
+              <span className="input-group-text"></span>
               <input
                 type="text"
                 className="form-control"
@@ -156,6 +173,7 @@ function Login() {
               />
             </div>
             <div className="input-group mb-2 custom-input">
+              <span className="input-group-text"></span>
               <input
                 type="password"
                 className="form-control"
@@ -174,6 +192,11 @@ function Login() {
           </form>
         </div>
       </div>
+
+      {/* ✅ Define Routes inside LoginPage file */}
+      <Routes>
+        <Route path="/create-application" element={<CreateApplication />} />
+      </Routes>
     </div>
   );
 }
