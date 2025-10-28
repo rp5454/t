@@ -1,0 +1,13 @@
+PROCEDURE "TRAINING_7"."LoadProductSales" ()
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   AS
+BEGIN
+   DELETE FROM "TRAINING_7"."ProductSales";
+
+   INSERT INTO "TRAINING_7"."ProductSales" VALUES ('P001', 'Laptop', 400);
+   INSERT INTO "TRAINING_7"."ProductSales" VALUES ('P002', 'Keyboard', 900);
+   INSERT INTO "TRAINING_7"."ProductSales" VALUES ('P003', 'Mouse', 1100);
+   INSERT INTO "TRAINING_7"."ProductSales" VALUES ('P004', 'Monitor', 350);
+   INSERT INTO "TRAINING_7"."ProductSales" VALUES ('P005', 'Headphones', 650);
+END;
