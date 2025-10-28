@@ -1,0 +1,6 @@
+INSERT INTO "TRAINING_7"."CustomerSales" VALUES ('C001', 'Rohan', 12000.00, 'January');
+INSERT INTO "TRAINING_7"."CustomerSales" VALUES ('C002', 'Amit', 8000.00, 'January');
+INSERT INTO "TRAINING_7"."CustomerSales" VALUES ('C003', 'Neha', 15000.00, 'January');
+INSERT INTO "TRAINING_7"."CustomerSales" VALUES ('C004', 'Kiran', 7000.00, 'January');
+INSERT INTO "TRAINING_7"."CustomerSales" VALUES ('C005', 'Ravi', 13000.00, 'January');
+INSERT INTO "TRAINING_7"."CustomerSales" VALUES ('C006', 'Preeti', 5000.00, 'January');
