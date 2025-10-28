@@ -1,0 +1,15 @@
+PROCEDURE "TRAINING_7"."GetTop5Customers" ()
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   AS
+BEGIN
+   -- Select top 5 customers by sales amount for January
+   SELECT 
+       "CUSTOMER_ID",
+       "CUSTOMER_NAME",
+       "SALES_AMOUNT"
+   FROM "TRAINING_7"."CustomerSales"
+   WHERE "SALES_MONTH" = 'January'
+   ORDER BY "SALES_AMOUNT" DESC
+   LIMIT 5;
+END;
