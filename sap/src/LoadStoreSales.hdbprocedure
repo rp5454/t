@@ -1,0 +1,14 @@
+PROCEDURE "TRAINING_7"."LoadStoreSales" ()
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   AS
+BEGIN
+   -- Sample data insertion
+   DELETE FROM "TRAINING_7"."StoreSales";
+
+   INSERT INTO "TRAINING_7"."StoreSales" VALUES ('S001', 'Mumbai Store', 500000);
+   INSERT INTO "TRAINING_7"."StoreSales" VALUES ('S002', 'Delhi Store', 350000);
+   INSERT INTO "TRAINING_7"."StoreSales" VALUES ('S003', 'Chennai Store', 620000);
+   INSERT INTO "TRAINING_7"."StoreSales" VALUES ('S004', 'Pune Store', 300000);
+   INSERT INTO "TRAINING_7"."StoreSales" VALUES ('S005', 'Bangalore Store', 570000);
+END;
