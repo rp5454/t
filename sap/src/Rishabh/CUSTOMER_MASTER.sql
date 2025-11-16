@@ -1,0 +1,26 @@
+-- File: db/src/Rishabh/CUSTOMER_MASTER.sql
+-- Run this in your HANA Cloud SQL console (schema = TRAINING)
+
+SET SCHEMA "TRAINING";
+
+DO BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN END;
+    EXEC 'DROP TABLE "TRAINING"."CUSTOMER_MASTER"';
+END;
+
+CREATE COLUMN TABLE "TRAINING"."CUSTOMER_MASTER" (
+    "CUSTOMER_ID"   NVARCHAR(36) NOT NULL,
+    "CUSTOMER_NAME" NVARCHAR(150),
+    "CITY"          NVARCHAR(100),
+    "PHONE"         NVARCHAR(30),
+    PRIMARY KEY ("CUSTOMER_ID")
+);
+
+-- Sample rows
+INSERT INTO "TRAINING"."CUSTOMER_MASTER" VALUES
+('C001','Rishabh Pathak','Lucknow','9999990001'),
+('C002','Amit Sharma','Delhi','9999990002'),
+('C003','Neha Verma','Kanpur','9999990003'),
+('C004','Kiran Joshi','Mumbai','9999990004'),
+('C005','Ravi Gupta','Bangalore','9999990005'),
+('C006','Preeti Singh','Lucknow','9999990006');
