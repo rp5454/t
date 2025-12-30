@@ -1,0 +1,91 @@
+DO 
+BEGIN
+   declare v_report_date NVARCHAR(100);
+   declare v_procedure_name NVARCHAR(100):='PROC_NFRP_DIM_RESTATEMENT_SCHEDULER_CALL';
+   declare v_rowcount decimal;
+   declare v_step decimal;
+   declare v_reason  NVARCHAR(4000);
+   declare v_period_date DATE;
+   declare v_check_count decimal;
+   declare v_report_date_adhoc NVARCHAR(100) ;
+   declare V_Run_type NVARCHAR(100):='Adhoc_run';
+declare MIN_HISTORY_RUN_START_DATE date;
+declare MAX_HISTORY_RUN_END_DATE date;
+declare M_FACT_RUN_PY_FY_YN  nvarchar(2000);
+declare month_offset int;
+declare M_FACT_RESTATEMENT_Y_N  nvarchar(2000);
+declare M_DIM_RESTATEMENT_Y_N  nvarchar(2000);
+declare M_HISTORY_RUN_ENABLE_YN  nvarchar(2000);
+declare M_RESTATEMENT_FACT2_ENABLE  nvarchar(2000);
+declare M_RESTATEMENT_FACT3_ENABLE  nvarchar(2000);
+declare M_DIM_RESTATEMENT_FACT2_ENABLE nvarchar(2000);
+declare M_DIM_RESTATEMENT_FACT3_ENABLE nvarchar(2000);
+declare M_PARAMETER_VALUE_ONETIME nvarchar(2000);
+declare M_PARAMETER_VALUE_ONETIME_FACT_1 nvarchar(2000);
+declare m_source_identifier nvarchar(2000);
+  declare M_PARAMETER_VALUE_ONETIME_FACT_2  nvarchar(2000);
+  declare lv_start_time time;
+  declare lv_end_time time;
+declare lv_curr_time time;
+ 
+ 
+declare cursor C3 FOR select  distinct SOURCE_IDENTIFIER,E_PERIOD_DATE from T1NFRP_PHY.TBL_NFRP_CALC_CONSOL_TAX  
+WHERE SOURCE_IDENTIFIER NOT IN ('7','16','17') 
+  and SOURCE_IDENTIFIER >=  (select PARAMETER_VALUE    FROM T1NFRP_PHY.TBL_PARAMETER 
+    where  PARAMETER_NAME = 'DIM_LAST_MONTH_UPDATED_DT_FACT1_SOURCE')
+    and E_PERIOD_DATE >=  (select PARAMETER_VALUE    FROM T1NFRP_PHY.TBL_PARAMETER 
+    where  PARAMETER_NAME = 'DIM_LAST_MONTH_UPDATED_DT_FACT1')
+  Order by SOURCE_IDENTIFIER,E_PERIOD_DATE;
+
+ 
+SELECT PARAMETER_VALUE INTO lv_start_time FROM T1NFRP_PHY.TBL_PARAMETER where  PARAMETER_NAME = 'DIM_RUN_START_TIME';
+  SELECT PARAMETER_VALUE INTO lv_end_time  FROM T1NFRP_PHY.TBL_PARAMETER where  PARAMETER_NAME = 'DIM_RUN_END_TIME';
+ 
+select PARAMETER_VALUE into M_PARAMETER_VALUE_ONETIME_FACT_1 DEFAULT 'N'  FROM T1NFRP_PHY.TBL_PARAMETER 
+  where  PARAMETER_NAME = 'DIM_ONE_TIME_PARAM_FACT1';
+  IF M_PARAMETER_VALUE_ONETIME_FACT_1 = 'Y' THEN 
+UPDATE  T1NFRP_PHY.TBL_PARAMETER 
+SET  PARAMETER_VALUE = (SELECT min(e_period_date) FROM T1NFRP_PHY.TBL_NFRP_CALC_CONSOL_TAX)
+where  PARAMETER_NAME = 'DIM_LAST_MONTH_UPDATED_DT_FACT1';
+COMMIT;
+ 
+UPDATE  T1NFRP_PHY.TBL_PARAMETER 
+SET  PARAMETER_VALUE = (SELECT min(source_identifier) FROM T1NFRP_PHY.TBL_NFRP_CALC_CONSOL_TAX)
+where  PARAMETER_NAME = 'DIM_LAST_MONTH_UPDATED_DT_FACT1_SOURCE';
+COMMIT;
+  UPDATE  T1NFRP_PHY.TBL_PARAMETER 
+              SET  PARAMETER_VALUE = 'N'
+   where  PARAMETER_NAME = 'DIM_ONE_TIME_PARAM_FACT1';
+   COMMIT;
+ 
+for k as c3 do
+select SOURCE_IDENTIFIER_NAME into m_source_identifier  from T1NFRP_PHY.tbl_source_identifier where  SOURCE_IDENTIFIER_PK = k.source_identifier;
+ 
+IF current_time < lv_start_time OR current_time >=  lv_end_time then
+RETURN;
+END IF;
+ 
+  v_step:=to_number(v_step) +1;
+  T1NFRP_PHY.PROC_NFRP_LOG_WRITE(k.e_period_date, 'S', v_procedure_name, v_step, 'FACT1 STARTED', m_source_identifier, 'FACT1', '0', 'Scheduler', 'Adhoc' );
+  T1NFRP_PHY.PROC_NFRP_CONFIG(k.e_period_date, k.e_period_date,m_source_identifier);
+  T1NFRP_PHY.PROC_NFRP_FINAL_FACT_1('Adhoc Run',m_source_identifier);
+   v_step:=to_number(v_step) +1;
+	T1NFRP_PHY.PROC_NFRP_LOG_WRITE(k.e_period_date, 'S', v_procedure_name, v_step, 'FACT1 END FOR '||k.e_period_date, m_source_identifier, 'FACT1', '0', 'Scheduler', 'Adhoc' );
+    UPDATE  T1NFRP_PHY.TBL_PARAMETER 
+    SET  PARAMETER_VALUE = k.e_period_date
+where  PARAMETER_NAME = 'DIM_LAST_MONTH_UPDATED_DT_FACT1';
+COMMIT;
+ 
+UPDATE  T1NFRP_PHY.TBL_PARAMETER 
+SET  PARAMETER_VALUE = (SELECT SOURCE_IDENTIFIER_PK  FROM T1NFRP_PHY.FUNCTION_SOURCE_IDENTIFIER(m_source_identifier) limit 1)
+where  PARAMETER_NAME = 'DIM_LAST_MONTH_UPDATED_DT_FACT1_SOURCE';
+ 
+COMMIT;
+ 
+IF current_time < lv_start_time OR current_time >=  lv_end_time then
+RETURN;
+END IF;
+ 
+  end for;
+  END IF;
+END;
