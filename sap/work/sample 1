@@ -1,0 +1,27 @@
+SELECT COUNT(*)
+FROM TBL_NFRP_CALC_CONSOL_TAX A
+inner join (SELECT * FROM DIM_ACCOUNT WHERE ACTIVE_FLAG ='Y' and upload_date = '2025-12-10') E
+on E.e_function = A.FK_FUNCTION 
+AND E.e_system = FK_GL_ACCOUNT
+AND  A.E_PERIOD_DATE='2025-04-01'
+AND E.e_segment_account = A.e_segment_0 
+AND E.e_dimension = 'Account'
+AND A.m_account_0=CASE WHEN RIGHT(E.m_account_0, 4) IN (' (-)', ' (+)') THEN LEFT(E.m_account_0, LENGTH(E.m_account_0)-4) ELSE E.m_account_0 END
+WHERE A.m_account_1 <> 'Service Charge'
+AND A.m_account_0 NOT IN ('Net Position','Tax','Operating Profit','Profit After Tax');
+ 
+ 
+SELECT COUNT(*)
+FROM TBL_NFRP_CALC_CONSOL_TAX OLD 
+WHERE EXISTS ( SELECT 1 FROM TBL_NFRP_FACT_ACCOUNT_TEMP NEW
+WHERE NEW.ACTION='UPDATE' AND
+OLD.FK_FUNCTION = NEW.FK_FUNCTION
+AND OLD.FK_GL_ACCOUNT=NEW.FK_GL_ACCOUNT
+AND OLD.FK_SEGMENT = NEW.FK_SEGMENT
+AND  OLD.E_PERIOD_DATE='2025-04-01'
+AND OLD.M_ACCOUNT_1 <> 'Service Charge'
+AND OLD.FK_BUSINESS_PRODUCT = NEW.FK_BUSINESS_PRODUCT
+AND OLD.FK_ENTITY = NEW.FK_ENTITY
+AND OLD.E_SEGMENT_0 = NEW.E_SEGMENT_0 AND OLD.m_account_0 NOT IN ('Net Position','Tax','Operating Profit','Profit After Tax')
+AND OLD.m_account_0=CASE WHEN RIGHT(NEW.m_account_0, 4) IN (' (-)', ' (+)') THEN LEFT(NEW.m_account_0, LENGTH(NEW.m_account_0)-4) ELSE NEW.m_account_0 END
+) ;
