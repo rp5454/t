@@ -1,0 +1,194 @@
+First, what this really means (in reality)
+
+Master data =
+
+Chart of Accounts
+
+Cost centers
+
+Business units
+
+Source identifiers
+
+Entity codes
+
+Configuration =
+
+Which sources are active
+
+Which periods can run
+
+Which logic applies to which source
+
+Run windows, flags, parameters
+
+Reporting consistency =
+
+Same account means same thing everywhere
+
+Same calculation logic across all reports
+
+Same numbers across Finance, Audit, Management
+
+
+What happens if you don’t maintain this?
+Real-world failure scenarios (not theory)
+❌ Scenario 1: Same account shows different numbers
+
+“Operating Expense” differs between:
+
+Tax report
+
+Management dashboard
+
+CFO asks: “Which one is correct?”
+
+Answer: “Depends which job ran last.”
+
+➡️ Trust in system collapses
+
+❌ Scenario 2: Source system mis-mapped
+
+Bank A posts to wrong function
+
+Costs appear under wrong department
+
+Budget vs Actual becomes meaningless
+
+➡️ Wrong decisions are made
+
+❌ Scenario 3: Config change not controlled
+
+Someone enables a source accidentally
+
+Partial data enters production
+
+KPIs spike or crash overnight
+
+➡️ PSS incident + finance escalation
+
+In simple words:
+
+Master data + config are the “constitution” of the finance system.
+Transactions are just citizens following those laws.
+
+
+
+
+
+
+What YTD (Year-to-Date) and MTD (Month-to-Date) mean practically
+Term	What it means
+MTD	Only current month values
+YTD	Accumulated values from year start
+
+Real practical reasons for separation
+1️⃣ Performance & scalability
+
+YTD data is large
+
+MTD data is small
+
+Mixing them slows the system massively
+
+2️⃣ Accounting correctness
+
+Some values are:
+
+Additive (revenue)
+
+Non-additive (rates, margins)
+
+MTD logic ≠ YTD logic
+
+3️⃣ Restatement control
+
+If March is corrected:
+
+Only YTD from March onward must change
+
+MTD for other months remains untouched
+
+This is impossible without separation.
+
+4️⃣ Reporting requirements
+
+Tax → mostly YTD
+
+Management → often MTD
+
+Forecast → hybrid
+
+Each needs independent accuracy.
+
+
+
+
+
+Restatement = correcting already reported financial data
+This can happen due to:
+
+Late postings
+
+Audit adjustments
+
+Accounting rule changes
+
+Source system corrections
+
+Human errors
+
+Why restatements are unavoidable
+
+In real finance:
+
+Data is never final on day one
+
+Audits happen months later
+
+Regulations change
+
+So systems must support correction, not resist it.
+What happens without proper restatement handling?
+❌ Scenario
+
+April numbers already reported
+
+May correction arrives for April
+
+System cannot update past data
+
+Result
+
+Manual Excel adjustments
+
+Shadow reporting
+
+Audit red flags
+
+Loss of regulatory credibility
+
+How NFRP handles restatement :
+
+✔ Source-wise restatement
+✔ Period-wise restatement
+✔ Controlled batch window
+✔ Restartable processing
+✔ Full logging
+
+This ensures:
+
+Only impacted data is recalculated
+
+No accidental overwrites
+
+Historical correctness is preserved
+
+
+Master Data + Configuration
+          ↓
+Correct MTD / YTD Processing
+          ↓
+Safe & Controlled Restatements
+          ↓
+Trusted Financial Reporting
