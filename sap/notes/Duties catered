@@ -1,0 +1,169 @@
+Yes — much more.
+NFRP is not just a reporting or dashboard backend.
+It automates core finance functions that would otherwise be done manually by finance users.
+
+A. Revenue calculation & allocation
+
+What a finance analyst would do manually:
+
+Pull revenue from multiple systems
+
+Allocate revenue to:
+
+entities
+
+products
+
+functions
+
+Adjust for corrections
+
+👉 NFRP does this systematically and repeatably
+
+B. Tax calculation & consolidation
+
+Manual work replaced by NFRP:
+
+Apply tax rules
+
+Consolidate across entities
+
+Exclude non-taxable items
+
+Prepare tax-ready numbers
+
+👉 That’s why you see:
+
+CALC_CONSOL_TAX
+
+Exclusions like Operating Profit, PAT
+
+C. Period closing activities
+
+Manual close tasks:
+
+Freeze periods
+
+Ensure no late postings
+
+Validate totals
+
+👉 NFRP enforces:
+
+Period boundaries
+
+Cut-off logic
+
+Restart-safe closing
+
+D. Restatement & audit adjustment
+
+Manual reality in finance:
+
+Auditors ask for corrections
+
+Past numbers must change
+
+Proof of change required
+
+👉 NFRP:
+
+Recalculates safely
+
+Logs every change
+
+Preserves audit trail
+
+
+So what exactly is NFRP if it’s not an app or API?
+
+This is the key clarity:
+
+NFRP is a governed financial processing platform built entirely inside the SAP HANA database.
+
+In simple words:
+
+❌ Not a UI app
+
+❌ Not an API product
+
+❌ Not a dashboard tool
+
+✅ A data-centric finance engine
+
+Think of NFRP as:
+Comparison	Meaning
+Excel macros	❌ Too small
+ERP UI	❌ Too interactive
+Backend service	❌ No API
+Financial calculation engine	✅ YES
+Batch processing system	✅ YES
+
+It lives in:
+
+Stored procedures
+
+Tables
+
+Parameters
+
+Schedulers
+
+Logs
+
+4️⃣ Why does PSS “manually run SQL” then?
+
+This is very common in enterprise finance and not a weakness.
+
+Important distinction
+Who	What they do
+Finance users	Never touch SQL
+Dashboards	Auto-refresh
+Schedulers	Run daily/monthly jobs
+PSS team	Control, validate, recover
+Why manual SQL execution exists
+
+PSS runs SQL to:
+
+Diagnose failures
+
+Validate counts
+
+Trigger ad-hoc restatements
+
+Verify data readiness
+
+Recover after incidents
+
+👉 This is operational control, not normal usage.
+
+Analogy (very important)
+
+Pilots normally fly with autopilot
+
+Engineers manually intervene only when required
+
+PSS = Engineers
+Schedulers = Autopilot
+NFRP = Aircraft system
+
+In short, NFRP is a database-native financial processing and restatement platform that automates core finance calculations—such as
+revenue, tax, consolidation, and period closing—using governed batch logic, while allowing controlled manual intervention by the PSS team for validation, recovery, and audit support.
+
+Why this design actually makes sense
+
+Finance systems prioritize:
+
+Correctness over convenience
+
+Control over UI
+
+Auditability over speed
+
+That’s why NFRP:
+
+Lives in the database
+
+Uses procedures instead of APIs
+
+Uses parameters instead of buttons
