@@ -1,0 +1,10 @@
+db/data/mfu.dashboard-MFUModuleStats.csv
+
+
+
+ID;moduleName;approved;pending;uploaded
+1;ESG;31;5;25
+2;FINCOST;4;2;2
+3;ICON;6;0;0
+4;NFRP;24;2;22
+5;TREASURY;8;0;5
