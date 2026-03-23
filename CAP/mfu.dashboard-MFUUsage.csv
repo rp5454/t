@@ -1,0 +1,13 @@
+db/data/mfu.dashboard-MFUUsage.csv
+
+
+ID;periodType;moduleName;usageCount
+1;Month;NFRP;23
+2;Month;ESG;17
+3;Month;ICON;2
+4;Quarter;ESG;31
+5;Quarter;NFRP;24
+6;Quarter;TREASURY;6
+7;Year;ESG;31
+8;Year;NFRP;24
+9;Year;TREASURY;6
