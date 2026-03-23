@@ -1,0 +1,47 @@
+<mvc:View
+    controllerName="mfu.dashboard.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+
+    <Page title="MFU Dashboard">
+
+        <content>
+
+            <!-- KPI CARDS -->
+            <HBox justifyContent="SpaceAround">
+
+                <GenericTile header="Total Uploaded">
+                    <TileContent>
+                        <NumericContent value="{/Summary/0/totalUploaded}" />
+                    </TileContent>
+                </GenericTile>
+
+                <GenericTile header="Total Approved">
+                    <TileContent>
+                        <NumericContent value="{/Summary/0/totalApproved}" />
+                    </TileContent>
+                </GenericTile>
+
+                <GenericTile header="Total Onboarded">
+                    <TileContent>
+                        <NumericContent value="{/Summary/0/totalOnboarded}" />
+                    </TileContent>
+                </GenericTile>
+
+            </HBox>
+
+            <!-- MODULE BAR CHART -->
+            <viz:VizFrame
+                id="idBarChart"
+                vizType="stacked_column"
+                width="100%"
+                height="400px">
+            </viz:VizFrame>
+
+        </content>
+
+    </Page>
+</mvc:View>
